@@ -1,6 +1,6 @@
 body {
     font-family: 'Quicksand', sans-serif;
-    background-image: url('"C:\Users\RADITYA\Downloads\image_5d6f0cad.png"');
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
     align-items: center;
     min-height: 100vh;
     margin: 0;

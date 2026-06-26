@@ -1,6 +1,6 @@
 body {
     font-family: 'Quicksand', sans-serif;
-    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20250326/pngtree-a-vibrant-scene-of-sunflowers-and-wildflowers-against-soft-yellow-background-image_17147000.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@ body {
     overflow: hidden;
     text-align: center;
     box-sizing: border-box;
-    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20250326/pngtree-a-vibrant-scene-of-sunflowers-and-wildflowers-against-soft-yellow-background-image_17147000.jpg');
+    
 }
 
 *, *::before, *::after {

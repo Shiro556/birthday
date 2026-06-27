@@ -44,61 +44,63 @@
 
     <audio id="lagu" src="birthday.mp3" loop></audio>
 
-   <script>
-    // Fungsi untuk melahirkan 1 balon baru
-    function buatSatuBalon() {
-        const balloonBox = document.getElementById('balloon-box');
-        if (!balloonBox) return; // Jaga-jaga kalau id container beda
+ <script>
+    function buatSalamBalon() {
+        // Otomatis bikin atau cari container balon agar dijamin muncul tanpa merusak HTML asli
+        let balloonBox = document.getElementById('balloon-box');
+        if (!balloonBox) {
+            balloonBox = document.createElement('div');
+            balloonBox.id = 'balloon-box';
+            document.body.appendChild(balloonBox);
+        }
 
         const balon = document.createElement('div');
         balon.className = 'balloon';
         
-        // List kombinasi warna balon cerah estetik
-        const warnaBalon = ['#fb7185', '#f43f5e', '#fde047', '#fbbf24', '#3b82f6', '#10b981', '#a855f7'];
+        // List warna balon estetik (mengandung nilai warna murni agar efek 'currentColor' cahayanya maksimal)
+        const warnaBalon = ['#fb7185', '#f43f5e', '#ffeb3b', '#ffc107', '#2196f3', '#4caf50', '#e040fb', '#ff5722'];
+        const warnaTerpilih = warnaBalon[Math.floor(Math.random() * warnaBalon.length)];
         
-        // 1. Set posisi horizontal acak dari kiri ke kanan layar (0% - 100%)
-        balon.style.left = Math.random() * 100 + 'vw';
+        balon.style.left = Math.random() * 95 + 'vw';
+        balon.style.backgroundColor = warnaTerpilih;
+        balon.style.color = warnaTerpilih; // Sinkronisasi warna untuk efek Bloom/Cahaya luar
         
-        // 2. Set warna acak dari list di atas
-        balon.style.backgroundColor = warnaBalon[Math.floor(Math.random() * warnaBalon.length)];
-        
-        // 3. Ukuran acak sedikit biar bervariasi dan natural (skala 0.8x sampai 1.2x)
+        // Ukuran variasi natural
         const skala = Math.random() * 0.4 + 0.8;
         balon.style.transform = `scale(${skala})`;
         
-        // 4. Durasi terbang acak (antara 5 sampai 8 detik) biar gak serempak kaku
-        balon.style.animationDuration = (Math.random() * 3 + 5) + 's'; 
+        // Kecepatan terbang anggun bervariasi (6s sampai 9s)
+        balon.style.animationDuration = (Math.random() * 3 + 6) + 's'; 
         
-        // Masukkan balon ke dalam container layar
         balloonBox.appendChild(balon);
         
-        // 5. HAPUS BALON DARI HTML SETELAH TERBANG (Biar performa laptop/HP gak lemot!)
+        // Hapus otomatis elemen setelah sukses melewati atas layar biar memori enteng
         setTimeout(() => {
             balon.remove();
-        }, 8000); // Dihapus setelah 8 detik (saat sudah lewat atas layar)
+        }, 9000); 
     }
 
-    // Fungsi otomatis yang memicu aliran balon tanpa henti
-    function mulaiBalonUnlimited() {
-        // Pas pertama kali web dibuka, langsung bikin 10 balon awal biar gak sepi
-        for (let i = 0; i < 10; i++) {
-            setTimeout(buatSatuBalon, Math.random() * 2000);
+    // Fungsi pembuat siklus balon nonstop
+    function jalankanSistemBalon() {
+        // Lahirkan 8 balon acak instan di awal buka halaman biar rame
+        for (let i = 0; i < 8; i++) {
+            setTimeout(buatSalamBalon, Math.random() * 3000);
         }
         
-        // REKAYASA UNLIMITED: Setiap 400 milidetik sekali, lahirkan 1 balon baru selamanya!
-        setInterval(buatSatuBalon, 400);
+        // Lahirkan 1 balon bercahaya baru setiap 450 milidetik secara unlimited
+        setInterval(buatSalamBalon, 450);
     }
 
-    // Jalankan fungsinya begitu seluruh halaman selesai di-load
-    window.onload = mulaiBalonUnlimited;
+    // Jalankan sistem begitu web terbuka sempurna
+    window.onload = jalankanSistemBalon;
 
-    // Logika tombol Buka & Tutup Surat kamu (tetap dipertahankan)
+    // Logika pop-up surat asli kamu
     function bukaSurat() {
         document.getElementById("pop-up-surat").style.display = "flex";
         var audio = document.getElementById("lagu");
         if (audio) {
             audio.play().catch(function(error) {
-                console.log("Musik butuh interaksi user pertama kali.");
+                console.log("Musik butuh klik user pertama kali.");
             });
         }
     }
@@ -107,3 +109,5 @@
         document.getElementById("pop-up-surat").style.display = "none";
     }
 </script>
+    </body>
+</html>

@@ -209,6 +209,15 @@ h2 {
     width: 2px;
     height: 10px;
     background-color: rgba(0, 0, 0, 0.15);
+    background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7) 0%, rgba(0,0,0,0) 70%);
+
+    /* 2. EFEK BLOOM CAHAYA NEON (Glow di luar balon) */
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2), 
+                0 0 15px rgba(255, 255, 255, 0.6), 
+                0 0 25px currentColor; /* 'currentColor' bikin warna cahaya otomatis ngikutin warna balonnya */
+    
+    /* 3. PENSTABIL CAHAYA (Biar efek glow-nya makin tebal dan nyata) */
+    filter: drop-shadow(0 0 8px currentColor);
 }
 
 @keyframes terbangUp {

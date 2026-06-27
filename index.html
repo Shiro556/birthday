@@ -44,38 +44,66 @@
 
     <audio id="lagu" src="birthday.mp3" loop></audio>
 
-    <script>
-        function bukaSurat() {
-            document.getElementById("pop-up-surat").style.display = "flex";
-            
-            var audio = document.getElementById("lagu");
-            if (audio) {
-                audio.play().then(function() {
-                    console.log("Musik sukses diputar di localhost!");
-                }).catch(function(error) {
-                    console.log("Autoplay diblokir browser, memicu alert.");
-                    alert("Klik 'OK' ya biar musik ulang tahunnya kedengeran! 🎵✨");
-                    audio.play();
-                });
-            }
+   <script>
+    // Fungsi untuk melahirkan 1 balon baru
+    function buatSatuBalon() {
+        const balloonBox = document.getElementById('balloon-box');
+        if (!balloonBox) return; // Jaga-jaga kalau id container beda
 
-            document.querySelectorAll('.balloon').forEach(b => b.remove());
-            for (let i = 0; i < 35; i++) {
-                let balloon = document.createElement('div');
-                balloon.className = 'balloon';
-                balloon.style.left = Math.random() * 100 + 'vw';
-                balloon.style.animationDelay = (Math.random() * 2) + 's';
-                balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 85%, 65%)`;
-                document.body.appendChild(balloon);
-                
-                setTimeout(() => balloon.remove(), 6000);
-            }
-        }
+        const balon = document.createElement('div');
+        balon.className = 'balloon';
+        
+        // List kombinasi warna balon cerah estetik
+        const warnaBalon = ['#fb7185', '#f43f5e', '#fde047', '#fbbf24', '#3b82f6', '#10b981', '#a855f7'];
+        
+        // 1. Set posisi horizontal acak dari kiri ke kanan layar (0% - 100%)
+        balon.style.left = Math.random() * 100 + 'vw';
+        
+        // 2. Set warna acak dari list di atas
+        balon.style.backgroundColor = warnaBalon[Math.floor(Math.random() * warnaBalon.length)];
+        
+        // 3. Ukuran acak sedikit biar bervariasi dan natural (skala 0.8x sampai 1.2x)
+        const skala = Math.random() * 0.4 + 0.8;
+        balon.style.transform = `scale(${skala})`;
+        
+        // 4. Durasi terbang acak (antara 5 sampai 8 detik) biar gak serempak kaku
+        balon.style.animationDuration = (Math.random() * 3 + 5) + 's'; 
+        
+        // Masukkan balon ke dalam container layar
+        balloonBox.appendChild(balon);
+        
+        // 5. HAPUS BALON DARI HTML SETELAH TERBANG (Biar performa laptop/HP gak lemot!)
+        setTimeout(() => {
+            balon.remove();
+        }, 8000); // Dihapus setelah 8 detik (saat sudah lewat atas layar)
+    }
 
-        function tutupSurat() {
-            document.getElementById("pop-up-surat").style.display = "none";
-            document.querySelectorAll('.balloon').forEach(b => b.remove());
+    // Fungsi otomatis yang memicu aliran balon tanpa henti
+    function mulaiBalonUnlimited() {
+        // Pas pertama kali web dibuka, langsung bikin 10 balon awal biar gak sepi
+        for (let i = 0; i < 10; i++) {
+            setTimeout(buatSatuBalon, Math.random() * 2000);
         }
-    </script>
-</body>
-</html>
+        
+        // REKAYASA UNLIMITED: Setiap 400 milidetik sekali, lahirkan 1 balon baru selamanya!
+        setInterval(buatSatuBalon, 400);
+    }
+
+    // Jalankan fungsinya begitu seluruh halaman selesai di-load
+    window.onload = mulaiBalonUnlimited;
+
+    // Logika tombol Buka & Tutup Surat kamu (tetap dipertahankan)
+    function bukaSurat() {
+        document.getElementById("pop-up-surat").style.display = "flex";
+        var audio = document.getElementById("lagu");
+        if (audio) {
+            audio.play().catch(function(error) {
+                console.log("Musik butuh interaksi user pertama kali.");
+            });
+        }
+    }
+
+    function tutupSurat() {
+        document.getElementById("pop-up-surat").style.display = "none";
+    }
+</script>

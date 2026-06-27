@@ -189,35 +189,41 @@ h2 {
 }
 
 /* BALON TERBANG BEBAS BUG MOUSE */
+/* BALON TERBANG DENGAN EFEK BLOOM SUPER CAHAYA */
 .balloon {
     position: absolute;
-    width: 32px;
-    height: 42px;
+    width: 34px;
+    height: 44px;
     border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-    bottom: -60px;
-    z-index: 9999;
-    opacity: 0.85;
-    animation: terbangUp 5s linear infinite;
-    pointer-events: none; /* Kursor mouse tidak akan mengganggu balon */
+    bottom: -80px;
+    z-index: 2; 
+    opacity: 0.95; /* Naikkan sedikit opacity-nya biar warna aslinya makin solid */
+    animation: terbangUp 6s linear infinite;
+    pointer-events: none; 
+    
+    /* Efek kilau 3D di dalam balon */
+    background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 50%);
+    
+    /* SUPEEER BLOOM EFFECT - DI-DOUBLE BOX SHADOW-NYA BIAR MAKIN TERANG */
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.15), 
+                0 0 20px #fff,                  /* Cahaya inti putih di tengah */
+                0 0 35px currentColor,          /* Bloom warna balon lapisan pertama */
+                0 0 60px currentColor;          /* Bloom warna balon lapisan kedua (makin melebar) */
+                
+    /* Penambah ketebalan cahaya luar */
+    filter: drop-shadow(0 0 15px currentColor);
 }
 
+/* Talinya juga kita bikin sedikit bercahaya mengikuti warna balon */
 .balloon::after {
     content: "";
     position: absolute;
-    bottom: -10px;
-    left: 15px;
+    bottom: -12px;
+    left: 16px;
     width: 2px;
-    height: 10px;
-    background-color: rgba(0, 0, 0, 0.15);
-    background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.7) 0%, rgba(0,0,0,0) 70%);
-
-    /* 2. EFEK BLOOM CAHAYA NEON (Glow di luar balon) */
-    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.2), 
-                0 0 15px rgba(255, 255, 255, 0.6), 
-                0 0 25px currentColor; /* 'currentColor' bikin warna cahaya otomatis ngikutin warna balonnya */
-    
-    /* 3. PENSTABIL CAHAYA (Biar efek glow-nya makin tebal dan nyata) */
-    filter: drop-shadow(0 0 8px currentColor);
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 8px currentColor;
 }
 
 @keyframes terbangUp {

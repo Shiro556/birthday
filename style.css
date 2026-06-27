@@ -1,6 +1,7 @@
 body {
     font-family: 'Quicksand', sans-serif;
-   background-image: url('https://i.pinimg.com/736x/38/f8/1a/38f81aea8c94be2aa3c0895869230db3.jpg');
+    /* BACKGROUND BERHASIL DIUBAH MENGGUNAKAN LINK PINTEREST PILIHANMU */
+    background-image: url('https://i.pinimg.com/736x/38/f8/1a/38f81aea8c94be2aa3c0895869230db3.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -17,16 +18,23 @@ body {
 
 *, *::before, *::after {
     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
 }
 
-/* KARTU UTAMA */
+/* KARTU UTAMA - TETAP SAMA NAMUN DIKUNCI TINGGINYA BIAR GA MERUSAK LAYOUT */
 .card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95); /* Sedikit sentuhan transparan biar background bunganya mengintip halus */
     padding: 2.5rem 2rem;
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(251, 113, 133, 0.2);
     width: 90%;
     max-width: 400px;
+    height: auto; /* MEMAKSA KARTU MENGIKUTI ISI KONTEN (ANTI MOLOR) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
     transition: transform 0.3s ease;
     border: 2px solid #fecaca;
@@ -65,11 +73,19 @@ h2 {
     border: 3px solid #ffe4e6;
 }
 
+/* CAKE WRAPPER - PROPORSI DIKUNCI BIAR KUE ULTAH GAK GEPEK */
+.cake-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
 .cake-wrapper img {
     width: 100%;
     max-width: 160px;
-    height: auto;
-    margin: 15px 0;
+    height: auto; /* Menjaga rasio kue */
+    object-fit: contain;
 }
 
 .btn {
@@ -100,11 +116,11 @@ h2 {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.65); /* Gelap solid transparan agar fokus ke surat */
+    background: rgba(0, 0, 0, 0.65); 
     display: none; 
     justify-content: center;
     align-items: center;
-    z-index: 99999; /* Berada di atas segala elemen */
+    z-index: 99999; 
     pointer-events: auto;
 }
 
@@ -113,7 +129,7 @@ h2 {
     background: #fffbeb; 
     border-radius: 24px;
     width: 92%;          
-    max-width: 540px;    /* Lebar diperbesar agar surat terlihat megah */
+    max-width: 540px;    
     position: relative;
     box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
     border: 4px solid #fff;
@@ -121,7 +137,6 @@ h2 {
     outline-offset: -10px;
     overflow: hidden;
     
-    /* Stabilizer */
     transform: scale(1);
     backface-visibility: hidden;
     animation: grandPopupOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
@@ -146,7 +161,7 @@ h2 {
 }
 
 .popup-inner-content {
-    padding: 4.5rem 2.5rem 2.5rem 2.5rem; /* Memberi ruang di bawah flap penutup */
+    padding: 4.5rem 2.5rem 2.5rem 2.5rem; 
 }
 
 .close-btn {
@@ -202,7 +217,7 @@ h2 {
     z-index: 9999;
     opacity: 0.85;
     animation: terbangUp 5s linear infinite;
-    pointer-events: none; /* Kursor mouse tidak akan mengganggu balon */
+    pointer-events: none; 
 }
 
 .balloon::after {
